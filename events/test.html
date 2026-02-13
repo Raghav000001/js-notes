@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            background-color: black;
+            color: white;
+        }
+
+        img {
+            height: 200px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- events = types -->
+    <!-- event bubbling (propagation)
+        reverse propagation
+       v/s event capturing -->
+
+    <ul id="images">
+        <li> <img
+                src="https://media.istockphoto.com/id/1550071750/photo/green-tea-tree-leaves-camellia-sinensis-in-organic-farm-sunlight-fresh-young-tender-bud.jpg?s=612x612&w=0&k=20&c=RC_xD5DY5qPH_hpqeOY1g1pM6bJgGJSssWYjVIvvoLw="
+                alt=""> </li>
+        <li> <img
+                src="https://img.freepik.com/free-photo/lavender-field-sunset-near-valensole_268835-3910.jpg?semt=ais_hybrid&w=740&q=80"
+                alt=""> </li>
+        <li> <img id="camera_women"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNubLmqdOK9pZWU-2IiD20cuSIdUUDi9-NvQ&s"
+                alt=""> </li>
+        <li> <img
+                src="https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE="
+                alt=""> </li>
+        <li> <img
+                src="https://img.freepik.com/free-photo/closeup-shot-beautiful-butterfly-with-interesting-textures-orange-petaled-flower_181624-7640.jpg?semt=ais_hybrid&w=740&q=80"
+                alt=""> </li>
+
+            <li> <a id="link" href="https://www.google.com/webhp?hl=en&ictx=2&sa=X&ved=0ahUKEwjd6vz97NWSAxVS-TgGHWJELkAQPQgM&zx=1770965069337&no_sw_cr=1">visit google</a> </li>    
+    </ul>
+
+    <form id="form" action="">
+        <input type="text" name="" id="">
+        <input type="text" name="" id="">
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <script>
+       const images = document.getElementById("images")
+       const cameraImage = document.getElementById("camera_women")
+       const link = document.getElementById("link")
+       const form = document.getElementById("form")
+
+       images.addEventListener("click",(e)=> {
+         if (e.target.tagName === "IMG") {
+             const toRemove = e.target.parentNode
+             toRemove.remove()
+         }
+           
+       })
+
+        // cameraImage.addEventListener("click", function (e) {
+        //     e.stopPropagation()
+        //     console.log("clicked on women"); 
+        // })
+
+
+        link.addEventListener("click",(e) => {
+            e.preventDefault()
+        })
+
+        form.addEventListener("submit",(e)=> {
+            e.preventDefault()
+            console.log("button clicked");
+            alert("butto clicked")
+        })
+    </script>
+</body>
+
+</html>

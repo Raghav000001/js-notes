@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advance DOM Concepts</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+
+      #todo-list li {
+        margin: 6px 0;
+        padding: 6px 10px;
+        background: #f2f2f2;
+        border-radius: 5px;
+      }
+
+      #cards {
+        margin-top: 20px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .card {
+        width: 200px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #fafafa;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: 0.3s;
+      }
+
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      h1 {
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 id="main-heading">My Todo List</h1>
+
+    <ul id="todo-list">
+      <li>Learn HTML</li>
+      <li>Learn CSS</li>
+      <li>Learn JavaScript</li>
+    </ul>
+
+    <hr />
+
+    <h2>Dynamic Cards</h2>
+    <div id="cards"></div>
+
+    <script>
+      /*
+        ADVANCE DOM MANIPULATION – DOM-ONLY VERSION
+         Covers: Traversal, insertAdjacentHTML, Templates,
+         cloneNode, Fragments, Dataset, Rect Position, Styles,
+         IntersectionObserver, MutationObserver, LocalStorage etc.
+       /
+
+      /*1. DOM TRAVERSAL
+        parentElement, children, nextElementSibling, previousElementSibling,
+        closest() → DOM navigation ke liye best.
+       */
+
+      const todoList = document.querySelector("#todo-list");
+      console.log("First Child:", todoList.firstElementChild);
+      console.log("Last Child:", todoList.lastElementChild);
+      console.log("Parent:", todoList.parentElement);
+      console.log("Next Sibling:",todoList.firstElementChild.nextElementSibling);
+      console.log("Closest UL:", todoList.closest("ul"));
+
+      /* 2.insertAdjacentHTML
+       innerHTML ka fast alternative – DOM ko re-render nahi karta
+       */
+
+      todoList.insertAdjacentHTML("beforeend","<li>Added using insertAdjacentHTML</li>");
+      todoList.insertAdjacentHTML(
+        "afterbegin",
+        "<li>Added using insertAdjacentHTML</li>"
+      );
+
+      /* 3.TEMPLATE STRING DOM 
+        Complex dynamic HTML ko template literals se banana.
+      */
+      const cards = document.querySelector("#cards");
+      for (let i = 1; i <= 3; i++) {
+        cards.innerHTML += `
+        <div class="card">
+            <h3>Card ${i}</h3>
+            <p>Generated using Template Strings</p>
+        </div>
+    `;
+      }
+
+      /* 4. cloneNode(true) 
+       * UI components ko duplicate karna (React-like reusability)
+       */
+
+      const firstCard = document.querySelector(".card");
+      const cloned = firstCard.cloneNode(true);
+      cloned.querySelector("h3").innerText = "Cloned Card";
+      cards.appendChild(cloned);
+
+
+      /* 5. Dataset
+      * HTML elements ke attributes me custom data store karna.
+       */
+      document.querySelectorAll("li").forEach((item, idx) => {
+        item.dataset.index = idx;
+        item.dataset.type = "todo-item";
+      });
+
+      console.log("Dataset example:", todoList.children[0].dataset);
+
+
+      /* 7. getBoundingClientRect 
+       * Position, width, height measure karne ke liye best.
+       */
+
+      const heading = document.querySelector("#main-heading");
+      console.log("Heading position:", heading.getBoundingClientRect());
+
+    
+
+
+      
+    </script>
+  </body>
+</html>

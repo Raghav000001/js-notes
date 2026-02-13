@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         .list_item{
+            list-style: none;
+         }
+         .list_item_urgent{
+           color: chocolate;
+         }
+    </style>
+</head>
+<body>
+    <input type="text" name="" id="inp"> 
+    <button id="btn">Add button</button>
+    <button id="delete_from_last_btn">delete from last</button>
+
+      <ul id="todo_list">
+          <li class="list_item">
+          </li>
+      </ul>
+
+      <button id="urgent_btn" onclick="appendHighPriorityTodo()">Add high Priority</button>
+
+    <script>
+        const input = document.getElementById("inp")
+        const button = document.getElementById("btn")
+        const todo_list = document.getElementById("todo_list")
+        const deleteFromLastButton = document.getElementById("delete_from_last_btn")
+
+        // console.log(todo_list);
+        
+        deleteFromLastButton.addEventListener("click",()=> {
+            const lastTodo = todo_list.lastChild
+            console.log(lastTodo);
+            if (lastTodo) {
+                todo_list.removeChild(lastTodo) 
+            }   
+        })
+
+        button.addEventListener("click",function(){
+               if (input.value.trim().length === 0) {
+            alert("please provide a todo")
+            return
+         }
+         
+         const todo_item = document.createElement("li")
+         todo_item.className = "list_item" 
+         todo_item.innerText = input.value
+
+        
+
+        const delete_btn = document.createElement("button")
+        delete_btn.textContent = "delete"  
+        // console.log(delete_btn);
+
+        delete_btn.addEventListener("click",function(){
+            const todo =  delete_btn.parentElement
+            //  console.log(todo);
+             todo_list.removeChild(todo)
+        })
+        
+
+         const Edit_btn = document.createElement("button")
+         Edit_btn.innerText = "Edit" 
+         
+         Edit_btn.addEventListener("click",function () {
+                const todo = Edit_btn.parentElement
+               console.log(todo);
+              const currentTodo =  todo.childNodes[0].nodeValue
+              
+              const newTodo = prompt("Edit your todo",currentTodo) 
+               
+              todo.firstChild.textContent = newTodo
+        })
+
+
+    
+         todo_list.appendChild(todo_item)
+         todo_item.appendChild(delete_btn)
+         todo_item.appendChild(Edit_btn)
+
+         input.value = ""
+        })
+
+         
+
+        function appendHighPriorityTodo() {
+         const highPriorityTodo = document.createElement("li")
+          highPriorityTodo.className = "list_item_urgent"
+          highPriorityTodo.innerText = input.value
+          
+          todo_list.prepend(highPriorityTodo)
+          todo_list.insertBefore(highPriorityTodo,todo_list.firstElementChild)
+       
+        }
+
+
+    </script>
+</body>
+</html>
