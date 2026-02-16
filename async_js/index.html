@@ -1,16 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+
+  <body>
+    <!-- set timeout , clear time out -->
+    <!-- set interval , clear interval -->
+    <!-- promises => consume , create -->
+    <!--  xhr request , fetch() , axios (react) -->
+    <!-- news app , wether app -->
+
+    <h1 id="head">some content</h1>
+    <button id="stop_btn">stop</button>
+     <button id="stop_interval">stop</button>
+     <button id="start_interval">start interval</button>
+
+    <script>
+      // 1. fn() , 2. time
+
+      const changeHeading = () => {
+        document.getElementById("head").innerText = "changed";
+      };
+
+      const my_timeout = setTimeout(changeHeading, 3000);
+
+      const stop = document.getElementById("stop_btn");
+      stop.addEventListener("click", () => {
+        clearInterval(my_timeout);
+      });
+
+ 
     
-    <!-- set timeout -->
-     <!-- set interval -->
-      <!-- promises => consume , create -->
-       <!-- fetch() -->
-        <!-- news app , wether app -->
-</body>
+  let my_interval;
+
+    const start_interval = document.getElementById("start_interval")
+    start_interval.addEventListener("click",()=> {
+          my_interval =  setInterval(()=> {
+         console.log("set interval is called");
+      },2000)
+    })
+
+
+     const stop_interval = document.getElementById("stop_interval")
+     stop_interval.addEventListener("click",function (){
+          clearInterval(my_interval)
+     })
+
+    </script>
+  </body>
 </html>
