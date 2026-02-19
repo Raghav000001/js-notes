@@ -36,3 +36,28 @@ my_promise
   })
 
   .catch((err)=>  {console.log(err)})
+
+  const newPromise = new Promise((resolve,reject)=> {
+      setTimeout(()=> {
+       const error = false
+      if (!error) {
+         resolve({name:"raghav"})
+      } else{
+         reject('something went wrong')
+      }
+
+      },2000)
+
+  })
+
+   const consume = async ()=> {
+       try {
+       const data =  await newPromise
+       console.log(data.name);
+       
+       } catch (error) {
+          console.log(error);
+       }
+   }
+
+   consume()
