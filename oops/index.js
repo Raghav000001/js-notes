@@ -45,8 +45,7 @@
                
            }
 
-        //    return this
-    }  
+1    }  
 
 
     const userOne = new User("raghav",21,true)
